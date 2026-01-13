@@ -11,6 +11,7 @@
         AllowsTransparency="True"
         Background="Transparent"
         ResizeMode="CanResizeWithGrip"
+        WindowStartupLocation="Manual"
         Topmost="True">
 
     <Window.Resources>

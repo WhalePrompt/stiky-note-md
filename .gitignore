@@ -19,3 +19,6 @@ Thumbs.db
 
 # WebView2 user data (runtime generated)
 WebView2/
+
+# Something else
+tmp/

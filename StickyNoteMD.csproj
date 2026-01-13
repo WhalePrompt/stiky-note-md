@@ -8,6 +8,12 @@
     <ApplicationIcon>markdown2.ico</ApplicationIcon>
     <AssemblyName>StickyNoteMD</AssemblyName>
     <RootNamespace>StickyNoteMD</RootNamespace>
+
+    <!-- Single-file publish settings -->
+    <PublishSingleFile>true</PublishSingleFile>
+    <SelfContained>true</SelfContained>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
   </PropertyGroup>
 
   <ItemGroup>

@@ -21,6 +21,7 @@ namespace StickyNoteMD
         private readonly string _noteId;
         private readonly string _noteFilePath;
         private readonly string _colorFilePath;
+        private readonly string _positionFilePath;
         private readonly string _notesFolder;
         private bool _isLoading = false;
         private string _currentTitleColor = "#B3E5FC";
@@ -48,9 +49,11 @@ namespace StickyNoteMD
 
             _noteFilePath = Path.Combine(_notesFolder, $"{_noteId}.md");
             _colorFilePath = Path.Combine(_notesFolder, $"{_noteId}.color");
+            _positionFilePath = Path.Combine(_notesFolder, $"{_noteId}.position");
 
             LoadNote();
             LoadColor();
+            LoadPosition();
             InitializeWebView();
 
             this.KeyDown += MainWindow_KeyDown;
@@ -135,6 +138,38 @@ namespace StickyNoteMD
             {
                 Directory.CreateDirectory(_notesFolder);
                 File.WriteAllText(_colorFilePath, $"{_currentTitleColor},{_currentBgColor}");
+            }
+            catch { }
+        }
+
+        private void LoadPosition()
+        {
+            try
+            {
+                if (File.Exists(_positionFilePath))
+                {
+                    var data = File.ReadAllText(_positionFilePath).Split(',');
+                    if (data.Length == 4)
+                    {
+                        var culture = System.Globalization.CultureInfo.InvariantCulture;
+                        this.Left = double.Parse(data[0], culture);
+                        this.Top = double.Parse(data[1], culture);
+                        this.Width = double.Parse(data[2], culture);
+                        this.Height = double.Parse(data[3], culture);
+                    }
+                }
+            }
+            catch { }
+        }
+
+        private void SavePosition()
+        {
+            try
+            {
+                Directory.CreateDirectory(_notesFolder);
+                var culture = System.Globalization.CultureInfo.InvariantCulture;
+                var posData = string.Format(culture, "{0},{1},{2},{3}", this.Left, this.Top, this.Width, this.Height);
+                File.WriteAllText(_positionFilePath, posData);
             }
             catch { }
         }
@@ -557,6 +592,8 @@ namespace StickyNoteMD
                     File.Delete(_noteFilePath);
                 if (File.Exists(_colorFilePath))
                     File.Delete(_colorFilePath);
+                if (File.Exists(_positionFilePath))
+                    File.Delete(_positionFilePath);
             }
             catch { }
         }
@@ -811,6 +848,7 @@ namespace StickyNoteMD
         protected override void OnClosed(EventArgs e)
         {
             SaveNote();
+            SavePosition();
             base.OnClosed(e);
         }
     }

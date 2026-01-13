@@ -42,7 +42,17 @@ dotnet build -c Release
 
 The executable will be in `bin/Release/net8.0-windows/`
 
-### Option 2: Download Release
+### Option 2: Single Executable File
+
+If you want a standalone single `.exe` file (includes .NET runtime):
+
+```bash
+dotnet publish -c Release
+```
+
+The single executable will be in `bin/Release/net8.0-windows/win-x64/publish/StickyNoteMD.exe`
+
+### Option 3: Download Release
 
 Download the latest release from the [Releases](https://github.com/WhalePrompt/sticky-note-md/releases) page.
 

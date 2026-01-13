@@ -1,0 +1,21 @@
+# Build results
+bin/
+obj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Rider
+.idea/
+
+# NuGet
+packages/
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# WebView2 user data (runtime generated)
+WebView2/
